@@ -1,6 +1,12 @@
 local modem = require("component").list("modem")
 local table = require("table")
 
+local SECURE = true
+
+if not SECURE then
+  return {["send"]=modem.send,["broadcast"]=modem.broadcast,["recv"]=modem.recv,["isWireless"]=modem.isWireless,["open"]=modem.open,["address"]=modem.address}
+end
+
 for a,b in pairs(modem) do
   x = require("component").proxy(a)
   if x.isWireless() then modem = x end
