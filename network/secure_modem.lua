@@ -17,7 +17,7 @@ local event = require("event")
 local table = require("table")
 local pro = require("programs")
 
-local f = io.open("/etc/sec.dat","r")
+local f = io.open("/etc/secure_modem.dat","r")
 local security = f:read(1024)
 f:close()
 

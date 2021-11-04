@@ -1,6 +1,7 @@
 local io = require("io")
 
 local function mysplit (inputstr, sep)
+-- splits strings with separator
   if sep == nil then
     sep = "%s"
   end
@@ -39,4 +40,10 @@ local function separgs(nr,tab)
   return table.unpack(unp)
 end
 
-return { ["mysplit"]=mysplit, ["getlines"]=getlines, ["separgs"]=separgs }
+local function organizetable(tab)
+  new_tab = {}
+  for x,y in pairs(tab) do new_tab[x]=y end
+  return new_tab
+end
+
+return { ["mysplit"]=mysplit, ["getlines"]=getlines, ["separgs"]=separgs, ["organizetable"]=organizetable }
