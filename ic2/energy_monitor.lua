@@ -1,10 +1,10 @@
-local power_api = require("gehenna_ic2_api")
+local drivers = require("gehenna_drivers")
 local gpu = require("gpu")
 require("shell").execute("resolution 100 30")
 local math = require("math")
 
 while true do
-    n,t,p = power_api.get_status()
+    n,t,p = drivers.ic2_te_mfsu.get_status()
     n = math.floor(n)
     t = math.floor(t)
     p = math.floor(p)

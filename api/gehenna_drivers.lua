@@ -8,4 +8,4 @@ local function get_status()
     return now, top, (now/top)*100
 end
 
-return {["get_status"]=get_status}
+return {["ic2_te_mfsu"]={["get_status"]=get_status}}
