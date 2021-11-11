@@ -17,4 +17,9 @@ local function translate(port,ip)
   return msg
 end
 
-return {["request"]=request,["translate"]=translate}
+local function send(ip,port,...)
+  require("component").modem.open(55)
+  require("component").modem.send(translate(55,ip),port,...)
+end
+
+return {["request"]=request,["translate"]=translate,["send"]=send}
