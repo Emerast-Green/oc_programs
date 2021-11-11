@@ -11,6 +11,7 @@ end
 
 -- modem
 local function send(ip,port,...)
+    require("component").modem.open(55)
     require("component").modem.send(require("arp").translate(55,ip),port,...)
 end
 
