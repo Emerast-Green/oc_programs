@@ -1,3 +1,4 @@
+-- ic2_te_mfsu
 local function get_status()
     now = 0
     top = 0
@@ -8,4 +9,9 @@ local function get_status()
     return now, top, (now/top)*100
 end
 
-return {["ic2_te_mfsu"]={["get_status"]=get_status}}
+-- modem
+local function send(ip,port,...)
+    require("component").modem.send(require("arp").translate(55,ip),port,...)
+end
+
+return {["ic2_te_mfsu"]={["get_status"]=get_status},["modem"]={["send"]=send}}

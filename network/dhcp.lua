@@ -16,11 +16,13 @@ modem.open(PORT)
 
 local RANGE = {2,20}
 
+-- CONFIG STATIC ADDRESSES IN //usr/lib/dhcp_static.lua
 NETWORK = "10.0.0"
 CLIENTS = {["n"]=0}
 
 for x,y in pairs(static_addresses) do
   CLIENTS[x]=y
+  CLIENTS.n=CLIENTS.n+1
 end
 
 local function in_table(table,name)

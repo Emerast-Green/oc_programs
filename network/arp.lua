@@ -11,7 +11,7 @@ end
 
 local function translate(port,ip)
   modem.open(port)
-  modem.broadcast(port,"translate_address")
+  modem.broadcast(port,"translate_address",ip)
   _,_,sender,_,_,msg = event.pull("modem_message")
   modem.close(port)
   return msg
