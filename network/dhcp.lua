@@ -1,7 +1,7 @@
 local modem = require("component").modem
 local event = require("event")
 local static_addresses = require("dhcp_static")
-local table = require("table")
+local tab = require("table")
 
 if modem.isWireless() then
   print("Modem is wireless")
@@ -74,9 +74,11 @@ local function find_free(table,range,network)
 end
 
 local function construct_index(table)
-  result = table.pack()
-  for x,y in pairs(table)
-    table.insert(result,y)
+  result = tab.pack()
+  for x,y in pairs(table) do
+    if y ~= "n" then 
+      tab.insert(result,x) 
+    end
   end
   return result
 end
@@ -114,7 +116,7 @@ local function dhpc()
         modem.send(sender,PORT,ans)
       end
     elseif msg == "get_index" then
-      modem.send(sender,PORT,table.unpack(construct_index(CLIENTS)))      
+      modem.send(sender,PORT,NETWORK,tab.unpack(construct_index(CLIENTS)))      
     else
       print("?")
       modem.send(sender,PORT,"error - wrong argument")
