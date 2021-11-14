@@ -28,7 +28,7 @@ local function get_index(port)
   require("component").modem.broadcast(port,"get_index")
   data = table.pack(event.pull("modem_message"))
   result = table.pack()
-  for x,y in pairs(data)
+  for x,y in pairs(data) do
     if x>5 then
       table.insert(result,y)
     end
