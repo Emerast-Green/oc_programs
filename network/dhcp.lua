@@ -102,7 +102,7 @@ local function dhpc()
         modem.send(sender,PORT,"not_found")
       else
         print(msg.."=>"..ans)
-        modem.send(sender,PORT,NETWORK.."."..ans)
+        modem.send(sender,PORT,ans)
       end      
     else
       print("?")
