@@ -76,8 +76,8 @@ end
 local function construct_index(table)
   result = tab.pack()
   for x,y in pairs(table) do
-    if y ~= "n" then 
-      tab.insert(result,x) 
+    if x ~= "n" then 
+      tab.insert(result,y) 
     end
   end
   return result
