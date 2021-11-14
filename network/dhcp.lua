@@ -1,6 +1,7 @@
 local modem = require("component").modem
 local event = require("event")
 local static_addresses = require("dhcp_static")
+local table = require("table")
 
 if modem.isWireless() then
   print("Modem is wireless")
@@ -72,6 +73,14 @@ local function find_free(table,range,network)
   return "not_found"
 end
 
+local function construct_index(table)
+  result = table.pack()
+  for x,y in pairs(table)
+    table.insert(result,y)
+  end
+  return result
+end
+
 local function dhpc()
   print("send request_address on 55 port")
   print("send translate_address on 55 port")
@@ -103,7 +112,9 @@ local function dhpc()
       else
         print(msg.."=>"..ans)
         modem.send(sender,PORT,ans)
-      end      
+      end
+    elseif msg == "get_index" then
+      modem.send(sender,PORT,table.unpack(construct_index(CLIENTS)))      
     else
       print("?")
       modem.send(sender,PORT,"error - wrong argument")

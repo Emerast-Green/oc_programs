@@ -1,5 +1,6 @@
 local modem = require("component").modem
 local event = require("event")
+local table = require("table")
 
 local function request(port)
   modem.open(port)
@@ -18,8 +19,21 @@ local function translate(port,ip)
 end
 
 local function send(ip,port,...)
-  require("component").modem.open(55)
-  require("component").modem.send(translate(55,ip),port,...)
+  require("component").modem.open(port)
+  require("component").modem.send(translate(port,ip),port,...)
 end
 
-return {["request"]=request,["translate"]=translate,["send"]=send}
+local function get_index(port)
+  require("component").modem.open(port)
+  require("component").modem.broadcast(port,"get_index")
+  data = table.pack(event.pull("modem_message"))
+  result = table.pack()
+  for x,y in pairs(data)
+    if x>5 then
+      table.insert(result,y)
+    end
+  end
+  return result
+end
+
+return {["request"]=request,["translate"]=translate,["send"]=send,["get_index"]=get_index}
