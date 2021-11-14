@@ -27,7 +27,18 @@ local function get_index(port)
   require("component").modem.open(port)
   require("component").modem.broadcast(port,"get_index")
   data = table.pack(event.pull("modem_message"))
-  return data
+  result = table.pack()
+  result["ips"] = table.pack()
+  for x,y in pairs(data) do
+    if x ~="n" then
+      if x==6 then
+        result["network"]=y
+      elseif x>6 then
+        table.insert(result["ips"],y)
+      end
+    end
+  end
+  return result
 end
 
 return {["request"]=request,["translate"]=translate,["send"]=send,["get_index"]=get_index}
